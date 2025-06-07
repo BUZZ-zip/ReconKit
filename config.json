@@ -1,0 +1,13 @@
+{
+    "subdomain_tools": [
+        "subfinder",
+        "findomain",
+        "assetfinder",
+        "crt.sh",
+        "sublist3r",
+        "chaos"
+    ],
+    "endpoint_tools": [
+        "gau"
+    ]
+}

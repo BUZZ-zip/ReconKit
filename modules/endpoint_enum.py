@@ -3,6 +3,8 @@ import tempfile
 import os
 import threading
 
+
+
 def run_command_input(cmd, input_path, output_list):
     """Exécute une commande shell avec un fichier en entrée, envoie le contenu sur stdin."""
     try:
@@ -33,13 +35,16 @@ def run_command(cmd, output_list):
 
 
 def get_endpoints(domain):
+    output_dir = os.path.expanduser(f"~/output/{domain}")
+    os.makedirs(output_dir, exist_ok=True)
     print(f"[*] Gathering endpoints for {domain}")
+    
 
-    input_file = f"../output/{domain}_alive_urls.txt"
+    input_file = f"{output_dir}/{domain}_alive_urls.txt"
     katana_cmd = f"katana -list {input_file} -d 2 -c 100"
     gau_cmd = f"gau --threads 200"
     waybackurl_cmd = f"waybackurls"
-    httpx_cmd = f'httpx -l "../output/{domain}_endpoints.txt" -threads 100 -silent -mc 200,302,403,401 -title -fr'
+    httpx_cmd = f'httpx -l "{output_dir}/{domain}_endpoints.txt" -threads 100 -silent -mc 200,302,403,401 -title -fr -no-color'
 
     katana_res = []
     gau_res = []
@@ -65,7 +70,7 @@ def get_endpoints(domain):
     all_endpoints = sorted(set(katana_res + gau_res + wayback_res))
     print(f"  -> {len(all_endpoints)} unique endpoints found.")
 
-    output_path = f'../output/{domain}_endpoints.txt'
+    output_path = f'{output_dir}/{domain}_endpoints.txt'
     with open(output_path, "w") as f:
         for sub in all_endpoints:
             f.write(sub + "\n")
@@ -74,9 +79,9 @@ def get_endpoints(domain):
     httpx_res = []
     run_command(httpx_cmd, httpx_res)
     print(f"  -> {len(httpx_res)} alive subdomains found.")
-    with open(f'../output/{domain}_alive_endpoints.txt', "w") as f:
+    with open(f'{output_dir}/{domain}_alive_endpoints.txt', "w") as f:
         for sub in httpx_res:
             f.write(sub + "\n")
 
-    print(f"[✓] Subdomains written to ../output/{domain}_alive_endpoints.txt")
+    print(f"[✓] Subdomains written to {output_dir}/{domain}_alive_endpoints.txt")
     return httpx_res
