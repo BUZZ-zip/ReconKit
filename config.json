@@ -8,6 +8,15 @@
         "chaos"
     ],
     "endpoint_tools": [
-        "gau"
-    ]
+        "gau",
+        "waybackurls",
+        "katana",
+        "hakrawler",
+        "gospider",
+        "getJS",
+        "subjs"
+    ],
+    "api_keys": {
+        "chaos": "10c001e5-9e17-4c3a-8a5f-76a6cde671b2"
+    }
 }
