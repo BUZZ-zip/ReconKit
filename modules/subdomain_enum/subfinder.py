@@ -1,5 +1,6 @@
 import subprocess
 import os
+from colorama import init, Fore, Style
 
 
 def run_command(cmd, output_list):
@@ -16,7 +17,7 @@ def run_command(cmd, output_list):
 
 def subfinder(domain):
     """Enumère les sous-domaines d'un domaine à l'aide de plusieurs outils."""
-    output_dir = os.path.expanduser(f"~/output/{domain}")
+    output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
 
     subfinder_cmd = f"subfinder -d {domain} -t 50 -silent"
@@ -26,10 +27,10 @@ def subfinder(domain):
 
     run_command(subfinder_cmd,subfinder_res)
 
-    print("[+] Running Subfinder")
+
 
   
     all_subs = set(subfinder_res)
     all_subs = sorted(all_subs)
-    print(f"  -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Subfinder -> {len(all_subs)} unique subdomains found.")
     return all_subs

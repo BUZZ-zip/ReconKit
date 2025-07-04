@@ -1,5 +1,6 @@
 import subprocess
 import os
+from colorama import init, Fore, Style
 
 
 def run_command(cmd, output_list):
@@ -16,7 +17,7 @@ def run_command(cmd, output_list):
 
 def assetfinder(domain):
     """Enumère les sous-domaines d'un domaine à l'aide de plusieurs outils."""
-    output_dir = os.path.expanduser(f"~/output/{domain}")
+    output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
 
     assetfinder_cmd = f"assetfinder --subs-only {domain}"
@@ -27,10 +28,10 @@ def assetfinder(domain):
 
     run_command(assetfinder_cmd,assetfinder_res)
 
-    print("[+] Running Assetfinder")
+
 
   
     all_subs = set(assetfinder_res)
     all_subs = sorted(all_subs)
-    print(f"  -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Assetfinder -> {len(all_subs)} unique subdomains found.")
     return all_subs

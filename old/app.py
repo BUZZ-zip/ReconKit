@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify, request, send_file, abort
 import os
 
 app = Flask(__name__)
-OUTPUT_DIR = os.path.expanduser("~/output")
+OUTPUT_DIR = os.path.expanduser("output")
 
 
 @app.route("/")

@@ -1,0 +1,666 @@
+[
+  {
+    "target": "http://autoconfig.boulangerieduhamel.com",
+    "http_status": 302,
+    "request_config": {
+      "headers": {
+        "User-Agent": "WhatWeb/0.5.5"
+      }
+    },
+    "plugins": {
+      "Cookies": {
+        "string": [
+          "SERVERID77446"
+        ]
+      },
+      "Country": {
+        "string": [
+          "FRANCE"
+        ],
+        "module": [
+          "FR"
+        ]
+      },
+      "HTTPServer": {
+        "string": [
+          "nginx"
+        ]
+      },
+      "HttpOnly": {
+        "string": [
+          "SERVERID77446"
+        ]
+      },
+      "IP": {
+        "string": [
+          "213.186.33.5"
+        ]
+      },
+      "nginx": {},
+      "RedirectLocation": {
+        "string": [
+          "https://ssl0.ovh.net/"
+        ]
+      },
+      "Title": {
+        "string": [
+          "302 Found"
+        ]
+      },
+      "UncommonHeaders": {
+        "string": [
+          "x-iplb-request-id,x-iplb-instance"
+        ]
+      }
+    }
+  },
+  {
+    "target": "https://ssl0.ovh.net/",
+    "http_status": 301,
+    "request_config": {
+      "headers": {
+        "User-Agent": "WhatWeb/0.5.5"
+      }
+    },
+    "plugins": {
+      "Country": {
+        "string": [
+          "ITALY"
+        ],
+        "module": [
+          "IT"
+        ]
+      },
+      "IP": {
+        "string": [
+          "193.70.18.144"
+        ]
+      },
+      "RedirectLocation": {
+        "string": [
+          "https://www.ovh.co.uk/mail/"
+        ]
+      }
+    }
+  },
+  {
+    "target": "https://www.ovh.co.uk/mail/",
+    "http_status": 301,
+    "request_config": {
+      "headers": {
+        "User-Agent": "WhatWeb/0.5.5"
+      }
+    },
+    "plugins": {
+      "Country": {
+        "string": [
+          "CANADA"
+        ],
+        "module": [
+          "CA"
+        ]
+      },
+      "IP": {
+        "string": [
+          "198.27.92.7"
+        ]
+      },
+      "RedirectLocation": {
+        "string": [
+          "https://www.ovhcloud.com/en-gb/mail/"
+        ]
+      },
+      "Title": {
+        "string": [
+          "301 Moved Permanently"
+        ]
+      },
+      "UncommonHeaders": {
+        "string": [
+          "x-iplb-request-id,x-iplb-instance,x-cdn-pop,x-cdn-pop-ip,x-request-id,x-cacheable"
+        ]
+      }
+    }
+  },
+  {
+    "target": "https://www.ovhcloud.com/en-gb/mail/",
+    "http_status": 200,
+    "request_config": {
+      "headers": {
+        "User-Agent": "WhatWeb/0.5.5"
+      }
+    },
+    "plugins": {
+      "Country": {
+        "string": [
+          "CANADA"
+        ],
+        "module": [
+          "CA"
+        ]
+      },
+      "Email": {
+        "string": [
+          "abuse@ovh.net",
+          "d9e77d2673834a0f83e8a881e42237a3@sentry.ovhcloud.com"
+        ]
+      },
+      "Frame": {},
+      "HTML5": {},
+      "IP": {
+        "string": [
+          "198.27.92.14"
+        ]
+      },
+      "Open-Graph-Protocol": {},
+      "PasswordField": {
+        "string": [
+          "password"
+        ]
+      },
+      "PoweredBy": {
+        "string": [
+          "-vmware\u00ae",
+          "AMD",
+          "Intel\u00ae",
+          "VMware",
+          "VMware\u00ae"
+        ]
+      },
+      "Script": {
+        "string": [
+          "application/json",
+          "application/ld+json",
+          "module"
+        ]
+      },
+      "Title": {
+        "string": [
+          "Webmail: access your OVH emails on ovhcloud.com | OVHcloud UK"
+        ]
+      },
+      "UncommonHeaders": {
+        "string": [
+          "x-content-type-options,access-control-allow-origin,x-toujours-debout-location,x-toujours-debout-branch,x-iplb-request-id,x-iplb-instance,x-cdn-pop,x-cdn-pop-ip,x-request-id,x-cacheable"
+        ]
+      },
+      "X-Frame-Options": {
+        "string": [
+          "ORIGIN"
+        ]
+      },
+      "X-XSS-Protection": {
+        "string": [
+          "1; mode=block"
+        ]
+      }
+    }
+  },
+  {
+    "target": "http://autodiscover.boulangerieduhamel.com",
+    "http_status": 302,
+    "request_config": {
+      "headers": {
+        "User-Agent": "WhatWeb/0.5.5"
+      }
+    },
+    "plugins": {
+      "Cookies": {
+        "string": [
+          "SERVERID77446"
+        ]
+      },
+      "Country": {
+        "string": [
+          "FRANCE"
+        ],
+        "module": [
+          "FR"
+        ]
+      },
+      "HTTPServer": {
+        "string": [
+          "nginx"
+        ]
+      },
+      "HttpOnly": {
+        "string": [
+          "SERVERID77446"
+        ]
+      },
+      "IP": {
+        "string": [
+          "213.186.33.5"
+        ]
+      },
+      "nginx": {},
+      "RedirectLocation": {
+        "string": [
+          "https://ssl0.ovh.net/"
+        ]
+      },
+      "Title": {
+        "string": [
+          "302 Found"
+        ]
+      },
+      "UncommonHeaders": {
+        "string": [
+          "x-iplb-request-id,x-iplb-instance"
+        ]
+      }
+    }
+  },
+  {
+    "target": "https://ssl0.ovh.net/",
+    "http_status": 301,
+    "request_config": {
+      "headers": {
+        "User-Agent": "WhatWeb/0.5.5"
+      }
+    },
+    "plugins": {
+      "Country": {
+        "string": [
+          "ITALY"
+        ],
+        "module": [
+          "IT"
+        ]
+      },
+      "IP": {
+        "string": [
+          "193.70.18.144"
+        ]
+      },
+      "RedirectLocation": {
+        "string": [
+          "https://www.ovh.co.uk/mail/"
+        ]
+      }
+    }
+  },
+  {
+    "target": "https://www.ovh.co.uk/mail/",
+    "http_status": 301,
+    "request_config": {
+      "headers": {
+        "User-Agent": "WhatWeb/0.5.5"
+      }
+    },
+    "plugins": {
+      "Country": {
+        "string": [
+          "CANADA"
+        ],
+        "module": [
+          "CA"
+        ]
+      },
+      "IP": {
+        "string": [
+          "198.27.92.7"
+        ]
+      },
+      "RedirectLocation": {
+        "string": [
+          "https://www.ovhcloud.com/en-gb/mail/"
+        ]
+      },
+      "Title": {
+        "string": [
+          "301 Moved Permanently"
+        ]
+      },
+      "UncommonHeaders": {
+        "string": [
+          "x-iplb-request-id,x-iplb-instance,x-cdn-pop,x-cdn-pop-ip,x-request-id,x-cacheable"
+        ]
+      }
+    }
+  },
+  {
+    "target": "https://www.ovhcloud.com/en-gb/mail/",
+    "http_status": 200,
+    "request_config": {
+      "headers": {
+        "User-Agent": "WhatWeb/0.5.5"
+      }
+    },
+    "plugins": {
+      "Country": {
+        "string": [
+          "CANADA"
+        ],
+        "module": [
+          "CA"
+        ]
+      },
+      "Email": {
+        "string": [
+          "abuse@ovh.net",
+          "d9e77d2673834a0f83e8a881e42237a3@sentry.ovhcloud.com"
+        ]
+      },
+      "Frame": {},
+      "HTML5": {},
+      "IP": {
+        "string": [
+          "198.27.92.14"
+        ]
+      },
+      "Open-Graph-Protocol": {},
+      "PasswordField": {
+        "string": [
+          "password"
+        ]
+      },
+      "PoweredBy": {
+        "string": [
+          "-vmware\u00ae",
+          "AMD",
+          "Intel\u00ae",
+          "VMware",
+          "VMware\u00ae"
+        ]
+      },
+      "Script": {
+        "string": [
+          "application/json",
+          "application/ld+json",
+          "module"
+        ]
+      },
+      "Title": {
+        "string": [
+          "Webmail: access your OVH emails on ovhcloud.com | OVHcloud UK"
+        ]
+      },
+      "UncommonHeaders": {
+        "string": [
+          "x-content-type-options,access-control-allow-origin,x-toujours-debout-location,x-toujours-debout-branch,x-iplb-request-id,x-iplb-instance,x-cdn-pop,x-cdn-pop-ip,x-request-id,x-cacheable"
+        ]
+      },
+      "X-Frame-Options": {
+        "string": [
+          "ORIGIN"
+        ]
+      },
+      "X-XSS-Protection": {
+        "string": [
+          "1; mode=block"
+        ]
+      }
+    }
+  },
+  {
+    "target": "https://boulangerieduhamel.com",
+    "http_status": 301,
+    "request_config": {
+      "headers": {
+        "User-Agent": "WhatWeb/0.5.5"
+      }
+    },
+    "plugins": {
+      "Country": {
+        "string": [
+          "FRANCE"
+        ],
+        "module": [
+          "FR"
+        ]
+      },
+      "HTTPServer": {
+        "string": [
+          "OVHcloud"
+        ]
+      },
+      "IP": {
+        "string": [
+          "213.186.33.40"
+        ]
+      },
+      "RedirectLocation": {
+        "string": [
+          "https://www.boulangerieduhamel.com//"
+        ]
+      },
+      "Title": {
+        "string": [
+          "301 Moved Permanently"
+        ]
+      }
+    }
+  },
+  {
+    "target": "https://www.boulangerieduhamel.com//",
+    "http_status": 301,
+    "request_config": {
+      "headers": {
+        "User-Agent": "WhatWeb/0.5.5"
+      }
+    },
+    "plugins": {
+      "Country": {
+        "string": [
+          "FRANCE"
+        ],
+        "module": [
+          "FR"
+        ]
+      },
+      "HTTPServer": {
+        "string": [
+          "OVHcloud"
+        ]
+      },
+      "IP": {
+        "string": [
+          "213.186.33.40"
+        ]
+      },
+      "PHP": {
+        "version": [
+          "7.3"
+        ]
+      },
+      "RedirectLocation": {
+        "string": [
+          "https://www.boulangerieduhamel.com/"
+        ]
+      },
+      "UncommonHeaders": {
+        "string": [
+          "x-redirect-by"
+        ]
+      },
+      "X-Powered-By": {
+        "string": [
+          "PHP/7.3"
+        ]
+      }
+    }
+  },
+  {
+    "target": "https://www.boulangerieduhamel.com/",
+    "http_status": 200,
+    "request_config": {
+      "headers": {
+        "User-Agent": "WhatWeb/0.5.5"
+      }
+    },
+    "plugins": {
+      "Bootstrap": {
+        "version": [
+          "1.4.7"
+        ]
+      },
+      "Country": {
+        "string": [
+          "FRANCE"
+        ],
+        "module": [
+          "FR"
+        ]
+      },
+      "Frame": {},
+      "HTML5": {},
+      "HTTPServer": {
+        "string": [
+          "OVHcloud"
+        ]
+      },
+      "IP": {
+        "string": [
+          "213.186.33.40"
+        ]
+      },
+      "JQuery": {
+        "version": [
+          "3.7.1"
+        ]
+      },
+      "MetaGenerator": {
+        "string": [
+          "Powered by WPBakery Page Builder - drag and drop page builder for WordPress.",
+          "Redux 4.4.18",
+          "WordPress 6.8.1"
+        ]
+      },
+      "Open-Graph-Protocol": {
+        "version": [
+          "website"
+        ]
+      },
+      "PHP": {
+        "version": [
+          "7.3"
+        ]
+      },
+      "PoweredBy": {
+        "string": [
+          "WPBakery"
+        ]
+      },
+      "Script": {
+        "string": [
+          "application/ld+json",
+          "speculationrules",
+          "text/html",
+          "text/javascript"
+        ]
+      },
+      "Title": {
+        "string": [
+          "Accueil - Boulangerie Duhamel"
+        ]
+      },
+      "UncommonHeaders": {
+        "string": [
+          "link"
+        ]
+      },
+      "WordPress": {
+        "version": [
+          "6.8.1"
+        ]
+      },
+      "X-Powered-By": {
+        "string": [
+          "PHP/7.3"
+        ]
+      }
+    }
+  },
+  {
+    "target": "https://www.boulangerieduhamel.com",
+    "http_status": 200,
+    "request_config": {
+      "headers": {
+        "User-Agent": "WhatWeb/0.5.5"
+      }
+    },
+    "plugins": {
+      "Bootstrap": {
+        "version": [
+          "1.4.7"
+        ]
+      },
+      "Country": {
+        "string": [
+          "FRANCE"
+        ],
+        "module": [
+          "FR"
+        ]
+      },
+      "Frame": {},
+      "HTML5": {},
+      "HTTPServer": {
+        "string": [
+          "OVHcloud"
+        ]
+      },
+      "IP": {
+        "string": [
+          "213.186.33.40"
+        ]
+      },
+      "JQuery": {
+        "version": [
+          "3.7.1"
+        ]
+      },
+      "MetaGenerator": {
+        "string": [
+          "Powered by WPBakery Page Builder - drag and drop page builder for WordPress.",
+          "Redux 4.4.18",
+          "WordPress 6.8.1"
+        ]
+      },
+      "Open-Graph-Protocol": {
+        "version": [
+          "website"
+        ]
+      },
+      "PHP": {
+        "version": [
+          "7.3"
+        ]
+      },
+      "PoweredBy": {
+        "string": [
+          "WPBakery"
+        ]
+      },
+      "Script": {
+        "string": [
+          "application/ld+json",
+          "speculationrules",
+          "text/html",
+          "text/javascript"
+        ]
+      },
+      "Title": {
+        "string": [
+          "Accueil - Boulangerie Duhamel"
+        ]
+      },
+      "UncommonHeaders": {
+        "string": [
+          "link"
+        ]
+      },
+      "WordPress": {
+        "version": [
+          "6.8.1"
+        ]
+      },
+      "X-Powered-By": {
+        "string": [
+          "PHP/7.3"
+        ]
+      }
+    }
+  }
+]

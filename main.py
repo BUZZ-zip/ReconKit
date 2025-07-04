@@ -4,30 +4,42 @@ import time
 import webbrowser
 import os
 import sys
-from simple_term_menu import TerminalMenu
 import json
 from modules.subdomain_enum.subdomain_enum import * 
 from modules.endpoint_enum.endpoint_enum import *
+from modules.param_finder.param_finder import *
 import shutil
 from colorama import Fore, Style, init
 from datetime import datetime
+import logging
 
-def read_config(config_path="config.json"):
+def read_config(config_path="page/static/config.json"):
     with open(config_path) as f:
         config = json.load(f)
 
-    selected_tools_subdomain = config.get("subdomain_tools", [])
-    selected_tools_endpoint = config.get("endpoint_tools", [])
-    return selected_tools_subdomain,selected_tools_endpoint
+    def get_enabled_tools(section_name):
+        tools = config.get(section_name, {})
+        enabled = []
+        for tool_name, tool_config in tools.items():
+            if isinstance(tool_config, dict) and tool_config.get("enabled"):
+                enabled.append(tool_name)
+        return enabled
+
+    selected_tools_subdomain = get_enabled_tools("subdomain")
+    selected_tools_endpoint = get_enabled_tools("endpoint")
+    selected_tools_param = get_enabled_tools("param_tools")
+
+    return selected_tools_subdomain, selected_tools_endpoint, selected_tools_param
 
 
 def print_banner(domain, output_path):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    selected_tools_subdomain,selected_tools_endpoint=read_config()
+    selected_tools_subdomain,selected_tools_endpoint,selected_tools_param=read_config()
 
     selected_tools_subdomain_str = ", ".join(selected_tools_subdomain)
     selected_tools_endpoint_str = ", ".join(selected_tools_endpoint)
+    selected_tools_param_finder_str=", ".join(selected_tools_param)
 
     banner = f"""
 ╔════════════════════════════════════════════════╗
@@ -37,21 +49,21 @@ def print_banner(domain, output_path):
 ║ GitHub: https://github.com/BUZZ-zip/ReconKit   ║
 ╚════════════════════════════════════════════════╝
 
-[+] Selected tools:
+{Fore.BLUE}[i]{Fore.RESET} Selected tools:
     ├── Subdomain enumeration : {selected_tools_subdomain_str}
     ├── Endpoint discovery    : {selected_tools_endpoint_str}
-    └── JS & Link extraction  : LinkFinder, GetJS, SubJS (à venir)
+    └── Param Finder          : {selected_tools_param_finder_str}
 """
     print(banner)
 
 def ascii_art():
     banner = fr"""
 {Fore.MAGENTA} 
-    ____                        __ __ _ __ 
-   / __ \___  _________  ____  / //_/(_) /_
-  / /_/ / _ \/ ___/ __ \/ __ \/ ,<  / / __/
- / _, _/  __/ /__/ /_/ / / / / /| |/ / /_  
-/_/ |_|\___/\___/\____/_/ /_/_/ |_/_/\__/ 
+{Fore.RESET}    ____                        {Fore.MAGENTA}__ __ _ __ {Fore.RESET}
+   / __ \___  _________  ____ {Fore.MAGENTA} / //_/(_) /_{Fore.RESET}
+  / /_/ / _ \/ ___/ __ \/ __ \{Fore.MAGENTA}/ ,<  / / __/{Fore.RESET}
+ / _, _/  __/ /__/ /_/ / / / {Fore.MAGENTA}/ /| |/ / /_{Fore.RESET}
+/_/ |_|\___/\___/\____/_/ /_{Fore.MAGENTA}/_/ |_/_/\__/ {Fore.RESET}
 {Fore.RESET}
     """
 
@@ -59,146 +71,100 @@ def ascii_art():
 
 
 
+def load_existing_domain_data(domain):
+    path = f"./output/data/{domain}.json"
+    if os.path.exists(path):
+        with open(path, 'r') as f:
+            return json.load(f)
+    else:
+        return {}
+
+def write_domain_data(domain, data):
+    path = f"./output/data/{domain}.json"
+    with open(path, 'w') as f:
+        json.dump(data, f, indent=2)
+
+def save_domain_result(domain,new_subdomains=None, new_endpoints=None):
+
+
+    data = load_existing_domain_data(domain)  # Charge depuis le fichier ou DB
+
+    # Garde les anciens si pas de nouveaux fournis
+    if new_subdomains is not None:
+        data['subdomains'] = len(new_subdomains)
+    if new_endpoints is not None:
+        data['endpoints'] = len(new_endpoints)
+
+    # Autres infos mises à jour si besoin
+    data['id'] = domain
+    data['name'] = domain
+    data['status'] = 'analyzed'
+    data['dateAdded'] = data['dateAdded'] = datetime.now().isoformat()
+
+    # Enregistre les données mises à jour
+    write_domain_data(domain, data)
+   
 def config():
-    subdomain_tools_list = [
-        "subfinder",
-        "findomain",
-        "assetfinder",
-        "crt.sh",
-        "amass",
-        "sublist3r",
-        "chaos"
-    ]
-    endpoint_tools_list = [
-        "gau",
-        "waybackurls",
-        "waymore",
-        "katana",
-        "hakrawler",
-        "gospider",
-        "getJS",
-        "subjs",
-        "linkfinder"
-        ]
-
-    config_path = "config.json"
-    selected_subdomains = []
-    selected_endpoints = []
-    api_keys = {}
-
-    if os.path.exists(config_path):
-        with open(config_path, "r") as f:
-            try:
-                old_config = json.load(f)
-                selected_subdomains = old_config.get("subdomain_tools", [])
-                selected_endpoints = old_config.get("endpoint_tools", [])
-                old_api_keys = old_config.get("api_keys", {})
-            except json.JSONDecodeError:
-                old_api_keys = {}
-    else:
-        old_api_keys = {}
-
-    def is_tool_installed(tool):
-        return shutil.which(tool) is not None
-
-    subdomain_tools_list = [
-        tool for tool in subdomain_tools_list if is_tool_installed(tool) or tool == "crt.sh" or tool == "chaos"
-    ]
-    endpoint_tools_list = [
-        tool for tool in endpoint_tools_list if is_tool_installed(tool)
-    ]
-
-    print("\rChoisis les outils de découverte de sous-domaines :")
-    terminal_menu_subdomains = TerminalMenu(
-        subdomain_tools_list,
-        multi_select=True,
-        show_multi_select_hint=True,
-        title="Sous-domaines (utilise espace pour sélectionner, entrée pour valider)",
-        preselected_entries=[
-            subdomain_tools_list.index(tool)
-            for tool in selected_subdomains if tool in subdomain_tools_list
-        ]
-    )
-    selected_subdomains_indices = terminal_menu_subdomains.show()
-    selected_subdomains = [subdomain_tools_list[i] for i in selected_subdomains_indices]
-
-    print("\rChoisis les outils de découverte d'endpoints :")
-    terminal_menu_endpoints = TerminalMenu(
-        endpoint_tools_list,
-        multi_select=True,
-        show_multi_select_hint=True,
-        title="Endpoints (utilise espace pour sélectionner, entrée pour valider)",
-        preselected_entries=[
-            endpoint_tools_list.index(tool)
-            for tool in selected_endpoints if tool in endpoint_tools_list
-        ]
-    )
-    selected_endpoints_indices = terminal_menu_endpoints.show()
-    selected_endpoints = [endpoint_tools_list[i] for i in selected_endpoints_indices]
+    with open(os.devnull, 'w') as FNULL:
+        subprocess.Popen(
+            ["python3", "page/app.py"],
+            stdout=FNULL,
+            stderr=FNULL
+        )
+        webbrowser.open("http://127.0.0.1:5000/?tab=config")
 
 
-    if "chaos" in selected_subdomains:
-        if "chaos" not in old_api_keys or not old_api_keys["chaos"].strip():
-            api_keys["chaos"] = input("🔑 Entrez votre clé API pour Chaos : ").strip()
-            os.environ["PDCP_API_KEY"] = api_keys["chaos"]
-        else:
-            print("Clé API Chaos déjà présente — utilisation de celle existante.")
-            api_keys["chaos"] = old_api_keys["chaos"]
+def main(a):
+    subdomains=''
+    endpoints=''
 
-
-    if selected_subdomains or selected_endpoints:
-        config_data = {
-            "subdomain_tools": selected_subdomains,
-            "endpoint_tools": selected_endpoints,
-            "api_keys": api_keys
-        }
-        with open(config_path, "w") as f:
-            json.dump(config_data, f, indent=4)
-        print("\nSélection sauvegardée dans 'config.json'")
-    else:
-        print("\nAucun outil sélectionné.")
-
-
-def main():
     parser = argparse.ArgumentParser(description="Recon Tool - Pipeline de reconnaissance")
     parser.add_argument("-d", "--domain", help="Domaine cible (ex: example.com)")
     parser.add_argument("-open", "--open_page", action="store_true", help="Ouvre une page web avec les résultats")
     parser.add_argument("-c","--config", action="store_true", help="Ouvre un menu pour sélectionner les outils")
-    parser.add_argument("--module", choices=["subdomain", "endpoint"], help="Choix du module à exécuter")
+    parser.add_argument("-m","--module", choices=["subdomain", "endpoint","paramfinder"], help="Choix du module à exécuter")
     args = parser.parse_args()
 
     domain = args.domain
     open_result = args.open_page
     config_menu=args.config
-    output_dir = os.path.expanduser(f"~/output/{domain}")
+    output_dir = os.path.expanduser(f"output/{domain}")
     print_banner(domain, output_dir)
 
     if config_menu:
+        print("[i] Ouverture de Flask depuis page/app.py ...")
         config()
 
     if domain:
-        print(f"[i] Domaine : {domain}")
+        print(f"{Fore.BLUE}[i]{Fore.RESET} Domaine : {domain}")
+
+        subdomains = None
+        endpoints = None
+
         if args.module == "subdomain":
-            run_tools_subdomain(domain)
+            subdomains=run_tools_subdomain(domain)
         elif args.module == "endpoint":
-            run_tools_endpoint(domain)
+            endpoints=run_tools_endpoint(domain)
+        elif args.module == "paramfinder":
+            run_tools_paramfinder(domain)
         else:
-                run_tools_subdomain(domain)
-                run_tools_endpoint(domain)
+                subdomains=run_tools_subdomain(domain)
+                endpoints=run_tools_endpoint(domain)
+                run_tools_paramfinder(domain)
         
-
-    if open_result:
-        
-        subprocess.Popen([sys.executable, "app.py"])
-        
+        save_domain_result(domain,subdomains,endpoints)
+    
+    if open_result and a:
+        a=False
+        subprocess.Popen([sys.executable, "page/app.py"])
         time.sleep(1)
-
-        webbrowser.open("http://127.0.0.1:5000/")
+        
 
 if __name__ == "__main__":
+    a=True
     start_time = time.time()
     ascii_art()
-    main()
+    main(a)
     end_time = time.time()
     elapsed_time = end_time - start_time
-    print(f"\n[i] Total execution time: {elapsed_time:.2f} seconds")
+    print(f"\n{Fore.BLUE}[i]{Fore.RESET} Total execution time: {elapsed_time:.2f} seconds")

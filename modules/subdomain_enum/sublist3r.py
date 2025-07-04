@@ -1,6 +1,7 @@
 import subprocess
 import os
 import re
+from colorama import init, Fore, Style
 
 def run_command(cmd, output_list):
     """Exécute une commande shell et stocke la sortie dans output_list."""
@@ -24,7 +25,7 @@ def is_valid_subdomain(line, domain):
 
 def sublist3r(domain):
     """Enumère les sous-domaines à l'aide de Sublist3r et filtre la sortie."""
-    output_dir = os.path.expanduser(f"~/output/{domain}")
+    output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
 
     sublist3r_cmd = f'sublist3r -d {domain}'
@@ -32,9 +33,9 @@ def sublist3r(domain):
     raw_output = []
     
     run_command(sublist3r_cmd, raw_output)
-    print("[+] Running sublist3r...")
+
     cleaned = [strip_ansi(line) for line in raw_output]
     subdomains = sorted(set(line for line in cleaned if is_valid_subdomain(line, domain)))
-    print(f"  -> {len(subdomains)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Sublis3r -> {len(subdomains)} unique subdomains found.")
 
     return subdomains

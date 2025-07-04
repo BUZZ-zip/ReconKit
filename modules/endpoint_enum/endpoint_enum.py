@@ -34,7 +34,7 @@ def extract_js_urls(input_file, output_file, domain):
     print(f"[+] {len(js_urls)} .js URLs extraites et enregistrées dans '{output_file}'.")
 
 def save_results(domain, results, method):
-    output_dir = os.path.expanduser(f"~/output/{domain}")
+    output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
 
     if method == 'urls':
@@ -104,7 +104,7 @@ def run_tools_endpoint(domain, config_path="config.json"):
     print(f"[i] Total unique subdomains found: {len(unique_sorted)}")
     save_results(domain, unique_sorted, 'urls')
 
-    output_dir = os.path.expanduser(f"~/output/{domain}")
+    output_dir = os.path.expanduser(f"output/{domain}")
     input_urls_file = os.path.join(output_dir, f"{domain}_endpoints.txt")
     js_output_file = os.path.join(output_dir, f"{domain}_js_urls.txt")
     extract_js_urls(input_urls_file, js_output_file,domain)
@@ -141,7 +141,7 @@ def run_tools_endpoint(domain, config_path="config.json"):
         for url in sorted(merged_urls):
             f.write(url + "\n")
 
-    alive_subdomains = httpx(domain)
-    save_results(domain, alive_subdomains, 'alive')
+    alive_endpoints = httpx(domain)
+    save_results(domain, alive_endpoints, 'alive')
 
-    
+    return alive_endpoints

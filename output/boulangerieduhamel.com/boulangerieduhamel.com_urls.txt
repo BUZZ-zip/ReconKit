@@ -1,0 +1,10 @@
+1 mx4.mail.ovh.net
+10 mx3.mail.ovh.net
+autoconfig.boulangerieduhamel.com
+autodiscover.boulangerieduhamel.com
+boulangerieduhamel.com
+boulangerieduhamel.comcicomca.com
+dns106.ovh.net
+ftp.boulangerieduhamel.com
+ns106.ovh.net
+www.boulangerieduhamel.com

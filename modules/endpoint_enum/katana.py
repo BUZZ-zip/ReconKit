@@ -16,7 +16,7 @@ def run_command(cmd, output_list):
 
 def katana(domain):
     """Enumère les sous-domaines d'un domaine à l'aide de plusieurs outils."""
-    output_dir = os.path.expanduser(f"~/output/{domain}")
+    output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
     input_file = f"{output_dir}/{domain}_alive_urls.txt"
     katana_cmd = f"katana -list {input_file} -d 4 -c 100"

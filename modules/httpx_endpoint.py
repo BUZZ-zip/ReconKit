@@ -1,5 +1,6 @@
 import subprocess
 import os
+from colorama import init, Fore, Style
 
 
 def run_command(cmd, output_list):
@@ -16,10 +17,10 @@ def run_command(cmd, output_list):
 
 def httpx(domain):
     """Enumère les sous-domaines d'un domaine à l'aide de plusieurs outils."""
-    output_dir = os.path.expanduser(f"~/output/{domain}")
+    output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
 
-    httpx_cmd = f'httpx -l "{output_dir}/{domain}_endpoints.txt" -threads 100 -silent -mc 200,204,206,301,302,307,308,401,403,407,500,502,503,504 -title -fr -no-color'
+    httpx_cmd = f'httpx -l "{output_dir}/{domain}_endpoints.txt" -threads 100 -silent -mc 200,204,206,301,302,307,308,401,403,407,500,502,503,504 -no-color -status-code'
 
     httpx_res=[]
    

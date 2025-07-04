@@ -1,0 +1,3 @@
+https://nappyhaircoiffure.com/wp-json/oembed/1.0/embed?url=FUZZ
+https://nappyhaircoiffure.com/wp-json/oembed/1.0/embed?url=FUZZ&format=FUZZ
+https://nappyhaircoiffure.com/wp-login.php?redirect_to=FUZZ&reauth=FUZZ

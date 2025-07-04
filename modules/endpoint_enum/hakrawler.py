@@ -14,7 +14,7 @@ def run_command_input(cmd, input_value, output_list):
 def hakrawler(domain):
     
 
-    output_dir = os.path.expanduser(f"~/output/{domain}")
+    output_dir = os.path.expanduser(f"output/{domain}")
     input_file = os.path.join(output_dir, f"{domain}_alive_urls.txt")
 
     if not os.path.exists(input_file):

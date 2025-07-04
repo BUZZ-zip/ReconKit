@@ -1,5 +1,6 @@
 import subprocess
 import os
+from colorama import init, Fore, Style
 
 
 def run_command(cmd, output_list):
@@ -16,7 +17,7 @@ def run_command(cmd, output_list):
 
 def crtsh(domain):
     """Enumère les sous-domaines d'un domaine à l'aide de plusieurs outils."""
-    output_dir = os.path.expanduser(f"~/output/{domain}")
+    output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
 
     crtsh_cmd = f'curl -s "https://crt.sh/?q=%.{domain}&output=json" | jq -r ".[].name_value" | sed "s/\\*\\.//g"'
@@ -28,10 +29,8 @@ def crtsh(domain):
 
     run_command(crtsh_cmd,crtsh_res)
 
-    print("[+] Running crt.sh")
-
   
     all_subs = set(crtsh_res)
     all_subs = sorted(all_subs)
-    print(f"  -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running crt.sh -> {len(all_subs)} unique subdomains found.")
     return all_subs

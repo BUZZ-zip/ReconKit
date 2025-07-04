@@ -1,0 +1,83 @@
+{
+  "subdomain": {
+    "alienvault": {
+      "apiKeys": {
+        "alienvault": "958d10c6c8d8a6059c8452caf0a550e0996c488cd02f5ee64214832668e606b9"
+      },
+      "enabled": false
+    },
+    "assetfinder": {
+      "enabled": false
+    },
+    "chaos": {
+      "apiKeys": {
+        "chaos": "803aac4e-43b0-4135-b299-136697134543"
+      },
+      "enabled": false
+    },
+    "crtsh": {
+      "enabled": true
+    },
+    "dnsdumpster": {
+      "apiKeys": {
+        "dnsdumpster": "86296df35e186750b4a82fe88a820af47626ce554ab34f64a5b3b0970365db42"
+      },
+      "enabled": false
+    },
+    "findomain": {
+      "enabled": false
+    },
+    "securitytrails": {
+      "apiKeys": {
+        "securitytrails": "jVnetl-AAH2JN17kT7fghjarOX_olKSk"
+      },
+      "enabled": false
+    },
+    "subfinder": {
+      "enabled": false
+    },
+    "sublist3r": {
+      "enabled": false
+    },
+    "virustotal": {
+      "apiKeys": {
+        "virustotal": "ae031342c04db60561edc1cf000b18ee7918c11b189234c1b969de8d4d4df676"
+      },
+      "enabled": false
+    }
+  },
+  "endpoint": {
+    "gau": {
+      "enabled": false
+    },
+    "getJS": {
+      "enabled": false
+    },
+    "gospider": {
+      "enabled": false
+    },
+    "hakrawler": {
+      "enabled": false
+    },
+    "katana": {
+      "enabled": false
+    },
+    "subjs": {
+      "enabled": false
+    },
+    "waybackurls": {
+      "enabled": false
+    },
+    "waymore": {
+      "enabled": false
+    }
+  },
+  "screenshot": {
+    "aquatone": {
+      "enabled": false
+    },
+    "httpx": {
+      "enabled": false
+    }
+  }
+}

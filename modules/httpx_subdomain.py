@@ -1,5 +1,6 @@
 import subprocess
 import os
+from colorama import init, Fore, Style
 
 
 def run_command(cmd, output_list):
@@ -16,7 +17,7 @@ def run_command(cmd, output_list):
 
 def httpx(domain):
     """Enumère les sous-domaines d'un domaine à l'aide de plusieurs outils."""
-    output_dir = os.path.expanduser(f"~/output/{domain}")
+    output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
 
     httpx_cmd = f'httpx -l "{output_dir}/{domain}_urls.txt" -threads 100 -silent -mc 200,204,206,301,302,307,308,401,403,407,500,502,503,504'
@@ -26,10 +27,9 @@ def httpx(domain):
 
     run_command(httpx_cmd,httpx_res)
 
-    print("[+] Running HTTPX")
 
   
     all_subs = set(httpx_res)
     all_subs = sorted(all_subs)
-    print(f"  -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running HTTPX -> {len(all_subs)} unique subdomains found.")
     return all_subs

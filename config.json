@@ -1,22 +1,83 @@
 {
-    "subdomain_tools": [
-        "subfinder",
-        "findomain",
-        "assetfinder",
-        "crt.sh",
-        "sublist3r",
-        "chaos"
-    ],
-    "endpoint_tools": [
-        "gau",
-        "waybackurls",
-        "katana",
-        "hakrawler",
-        "gospider",
-        "getJS",
-        "subjs"
-    ],
-    "api_keys": {
-        "chaos": "10c001e5-9e17-4c3a-8a5f-76a6cde671b2"
+  "subdomain": {
+    "alienvault": {
+      "apiKeys": {
+        "alienvault": ""
+      },
+      "enabled": false
+    },
+    "assetfinder": {
+      "enabled": true
+    },
+    "chaos": {
+      "apiKeys": {
+        "chaos": ""
+      },
+      "enabled": true
+    },
+    "crtsh": {
+      "enabled": false
+    },
+    "dnsdumpster": {
+      "apiKeys": {
+        "dnsdumpster": ""
+      },
+      "enabled": false
+    },
+    "findomain": {
+      "enabled": false
+    },
+    "securitytrails": {
+      "apiKeys": {
+        "securitytrails": ""
+      },
+      "enabled": true
+    },
+    "subfinder": {
+      "enabled": false
+    },
+    "sublist3r": {
+      "enabled": true
+    },
+    "virustotal": {
+      "apiKeys": {
+        "virustotal": ""
+      },
+      "enabled": false
     }
+  },
+  "endpoint": {
+    "gau": {
+      "enabled": false
+    },
+    "getJS": {
+      "enabled": false
+    },
+    "gospider": {
+      "enabled": false
+    },
+    "hakrawler": {
+      "enabled": false
+    },
+    "katana": {
+      "enabled": false
+    },
+    "subjs": {
+      "enabled": false
+    },
+    "waybackurls": {
+      "enabled": false
+    },
+    "waymore": {
+      "enabled": false
+    }
+  },
+  "screenshot": {
+    "aquatone": {
+      "enabled": false
+    },
+    "httpx": {
+      "enabled": false
+    }
+  }
 }

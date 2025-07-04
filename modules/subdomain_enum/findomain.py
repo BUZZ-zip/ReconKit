@@ -1,5 +1,6 @@
 import subprocess
 import os
+from colorama import init, Fore, Style
 
 
 def run_command(cmd, output_list):
@@ -26,10 +27,8 @@ def findomain(domain):
 
     run_command(findomain_cmd,findomain_res)
 
-    print("[+] Running Findomain")
-
   
     all_subs = set(findomain_res)
     all_subs = sorted(all_subs)
-    print(f"  -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Chaos -> {len(all_subs)} unique subdomains found.")
     return all_subs

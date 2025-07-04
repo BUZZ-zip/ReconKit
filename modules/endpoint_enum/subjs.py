@@ -16,7 +16,7 @@ def run_command(cmd, output_list):
 
 def subjs(domain):
     """Enumère les sous-domaines d'un domaine à l'aide de plusieurs outils."""
-    output_dir = os.path.expanduser(f"~/output/{domain}")
+    output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
     input_file = f"{output_dir}/{domain}_endpoints.txt"
     subjs_cmd = f"subjs -i {input_file} -c 100"

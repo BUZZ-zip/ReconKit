@@ -16,7 +16,7 @@ def run_command(cmd, output_list):
 
 def getjs(domain):
     """Enumère les sous-domaines d'un domaine à l'aide de plusieurs outils."""
-    output_dir = os.path.expanduser(f"~/output/{domain}")
+    output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
     input_file = f"{output_dir}/{domain}_endpoints.txt"
     getjs_cmd = f"getJS -input {input_file} -complete -resolve -threads 100"
