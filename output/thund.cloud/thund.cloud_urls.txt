@@ -1,11 +1,15 @@
+*.thund.cloud
+10 mail.thund.cloud
 ai.thund.cloud
 autoconfig.thund.cloud
 autodiscover.thund.cloud
 bot.thund.cloud
+box.thund.cloud
 cc.thund.cloud
 centre.thund.cloud
 clement.thund.cloud
 dev.thund.cloud
+dns105.ovh.net
 docker.thund.cloud
 docs.thund.cloud
 doctoplan.thund.cloud
@@ -15,6 +19,7 @@ kube.thund.cloud
 mail.thund.cloud
 miam.thund.cloud
 nico.thund.cloud
+ns105.ovh.net
 proxmox.thund.cloud
 simple-node.thund.cloud
 status.thund.cloud

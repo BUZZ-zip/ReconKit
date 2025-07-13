@@ -2,7 +2,7 @@
   "subdomain": {
     "alienvault": {
       "apiKeys": {
-        "alienvault": ""
+        "alienvault": "958d10c6c8d8a6059c8452caf0a550e0996c488cd02f5ee64214832668e606b9"
       },
       "enabled": true
     },
@@ -11,7 +11,7 @@
     },
     "chaos": {
       "apiKeys": {
-        "chaos": ""
+        "chaos": "803aac4e-43b0-4135-b299-136697134543"
       },
       "enabled": true
     },
@@ -20,7 +20,7 @@
     },
     "dnsdumpster": {
       "apiKeys": {
-        "dnsdumpster": ""
+        "dnsdumpster": "86296df35e186750b4a82fe88a820af47626ce554ab34f64a5b3b0970365db42"
       },
       "enabled": true
     },
@@ -29,7 +29,7 @@
     },
     "securitytrails": {
       "apiKeys": {
-        "securitytrails": ""
+        "securitytrails": "jVnetl-AAH2JN17kT7fghjarOX_olKSk"
       },
       "enabled": true
     },
@@ -41,7 +41,7 @@
     },
     "virustotal": {
       "apiKeys": {
-        "virustotal": ""
+        "virustotal": "ae031342c04db60561edc1cf000b18ee7918c11b189234c1b969de8d4d4df676"
       },
       "enabled": true
     }
