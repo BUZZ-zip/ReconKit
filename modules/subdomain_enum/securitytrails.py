@@ -21,11 +21,15 @@ def securitytrails(domain):
 
     output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
-    config_path = "config.json"
+    config_path = "page/static/config.json"
     with open(config_path, "r") as f:
         old_config = json.load(f)
-        api_keys = old_config.get("api_keys", {})
-        securitytrails_key = api_keys.get("securitytrails", None)
+        securitytrails_key = (
+        old_config.get("subdomain", {})
+        .get("securitytrails", {})
+        .get("apiKeys", {})
+        .get("securitytrails", None)
+    )
 
     securitytrails_cmd = (
         f'curl -s -H "APIKEY: {securitytrails_key}" '
@@ -37,5 +41,5 @@ def securitytrails(domain):
     run_command(securitytrails_cmd, securitytrails_res)
 
     all_subs = sorted(set(securitytrails_res))
-    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running SecurityTrails -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running SecurityTrails -> {len(all_subs)} unique subdomains found")
     return all_subs

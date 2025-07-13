@@ -36,7 +36,7 @@ def whatweb(domain):
     with open(input_file, "r") as f:
         urls = [line.strip() for line in f if line.strip()]
 
-    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running WhatWeb -> {len(urls)} URLs à scanner.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running WhatWeb -> {len(urls)} URLs to scan")
 
     for url in urls:
         res = run_whatweb(url)
@@ -45,5 +45,5 @@ def whatweb(domain):
     with open(output_file, "w") as out:
         json.dump(all_results, out, indent=2)
 
-    print(f"{Fore.GREEN}[✓]{Style.RESET_ALL} Résultats sauvegardés dans : {output_file}")
+    print(f"{Fore.BLUE}[i]{Fore.RESET} Saved results to : {output_file}")
     return []

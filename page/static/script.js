@@ -280,11 +280,11 @@ class ReconKitManager {
                 </div>
                 <div class="domain-stats">
                     <div class="domain-stat">
-                        <span class="domain-stat-number">${domain.subdomains}</span>
+                        <span class="domain-stat-number">${domain.subdomainsCount || 0}</span>
                         <span class="domain-stat-label">Subdomains</span>
                     </div>
                     <div class="domain-stat">
-                        <span class="domain-stat-number">${domain.endpoints}</span>
+                        <span class="domain-stat-number">${domain.endpointsCount || 0}</span>
                         <span class="domain-stat-label">Endpoints</span>
                     </div>
                 </div>
@@ -652,8 +652,8 @@ loadToolsConfig() {
 
     updateStats() {
         const totalDomains = this.domains.length;
-        const totalSubdomains = this.domains.reduce((sum, domain) => sum + (domain.subdomains || 0), 0);
-        const totalEndpoints = this.domains.reduce((sum, domain) => sum + (domain.endpoints || 0), 0);
+        const totalSubdomains = this.domains.reduce((sum, domain) => sum + (domain.subdomainsCount || 0), 0);
+        const totalEndpoints = this.domains.reduce((sum, domain) => sum + (domain.endpointsCount || 0), 0);
 
         
         document.getElementById('totalDomains').textContent = totalDomains;
@@ -674,10 +674,13 @@ loadToolsConfig() {
         const domainPromises = domainSummaries.map(async (summary) => {
             const detailRes = await fetch(`/api/domain/${summary.id}`);
             const detail = await detailRes.json();
+            console.log('Raw data:', detail.subdomains, detail.endpoints, typeof detail.subdomains, typeof detail.endpoints);
             return {
                 ...detail,
                 subdomains: detail.subdomains || [],
-                endpoints: detail.endpoints || []
+                endpoints: detail.endpoints || [],
+                subdomainsCount: typeof detail.subdomains === 'number' ? detail.subdomains : (detail.subdomains || []).length,
+                endpointsCount: typeof detail.endpoints === 'number' ? detail.endpoints : (detail.endpoints || []).length
             };
         });
 

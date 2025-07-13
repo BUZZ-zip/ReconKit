@@ -1,4 +1,0 @@
-http://autoconfig.boulangerieduhamel.com
-http://autodiscover.boulangerieduhamel.com
-https://boulangerieduhamel.com
-https://www.boulangerieduhamel.com

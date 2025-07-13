@@ -1,6 +1,6 @@
 import subprocess
 import os
-import jsbeautifier
+from colorama import Fore,Style
 
 
 def run_command(cmd, output_list):
@@ -30,12 +30,10 @@ def katana(domain):
 
     run_command(katana_cmd,katana_res)
 
-    print("[+] Running Katana")
 
   
     all_subs = set(katana_res)
     all_subs = sorted(all_subs)
-    print(f"  -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running linkfinder -> {len(all_subs)} unique endpoints found")
     return all_subs
 
-katana("tictac.com")

@@ -1,5 +1,6 @@
 import subprocess
 import os
+from colorama import Fore,Style
 
 
 def run_command_input(cmd, input_path, output_list):
@@ -17,7 +18,7 @@ def run_command_input(cmd, input_path, output_list):
 
 
 
-def waybackurls(domain):
+def waybackurls(domain,custom_header):
     """Enumère les sous-domaines d'un domaine à l'aide de plusieurs outils."""
     output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
@@ -31,10 +32,9 @@ def waybackurls(domain):
 
     run_command_input(waybackurl_cmd,input_file,waybackurl_res)
 
-    print("[+] Running Waybackurl")
 
   
     all_subs = set(waybackurl_res)
     all_subs = sorted(all_subs)
-    print(f"  -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Waybackurls -> {len(all_subs)} unique endpoints found")
     return all_subs

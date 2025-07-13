@@ -1,5 +1,6 @@
 from modules.endpoint_enum.gau import gau
 from modules.endpoint_enum.waybackurls import waybackurls
+from modules.endpoint_enum.waymore1 import waymore
 from modules.endpoint_enum.katana import katana
 from modules.endpoint_enum.hakrawler import hakrawler
 from modules.endpoint_enum.gospider import gospider
@@ -11,6 +12,7 @@ from urllib.parse import urlparse
 import json
 import threading
 import re
+from colorama import init, Fore, Style
 
 
 
@@ -31,7 +33,6 @@ def extract_js_urls(input_file, output_file, domain):
         for js_url in js_urls:
             out.write(js_url + '\n')
 
-    print(f"[+] {len(js_urls)} .js URLs extraites et enregistrées dans '{output_file}'.")
 
 def save_results(domain, results, method):
     output_dir = os.path.expanduser(f"output/{domain}")
@@ -46,19 +47,37 @@ def save_results(domain, results, method):
     else:
         print("[!] ERROR during save")
         return
+    
 
     unique_sorted = sorted(set(results))
     with open(filename, "w") as f:
         for sub in unique_sorted:
             f.write(sub + "\n")
+    
+    print(f"{Fore.BLUE}[i]{Fore.RESET} Saved {len(unique_sorted)} subdomains to {filename}")
 
-    print(f"[i] Saved {len(unique_sorted)} unique endpoint to {filename}")
 
-def run_tools_endpoint(domain, config_path="config.json"):
+def read_config(config_path="page/static/config.json"):
     with open(config_path) as f:
         config = json.load(f)
 
-    selected_tools = config.get("endpoint_tools", [])
+    def get_enabled_tools(section_name):
+        tools = config.get(section_name, {})
+        enabled = []
+        for tool_name, tool_config in tools.items():
+            if isinstance(tool_config, dict) and tool_config.get("enabled"):
+                enabled.append(tool_name)
+        return enabled
+
+    selected_tools_subdomain = get_enabled_tools("endpoint")
+    return selected_tools_subdomain
+
+def run_tools_endpoint(domain, custom_header=None, config_path="page/static/config.json"):
+    print(f"\n{Fore.CYAN}[*]{Fore.RESET} Running endpoint enumeration\n")
+    with open(config_path) as f:
+        config = json.load(f)
+
+    selected_tools = read_config()
 
     results = []
     results_lock = threading.Lock()
@@ -67,12 +86,12 @@ def run_tools_endpoint(domain, config_path="config.json"):
     js_lock = threading.Lock()
 
     def run_and_collect(tool_func):
-        res = tool_func(domain)
+        res = tool_func(domain, custom_header=custom_header)
         with results_lock:
             results.extend(res)
 
     def run_and_collect_js(tool_func):
-        res = tool_func(domain)
+        res = tool_func(domain, custom_header=custom_header)
         with js_lock:
             js_results.extend(res)
 
@@ -83,6 +102,10 @@ def run_tools_endpoint(domain, config_path="config.json"):
 
     if "waybackurls" in selected_tools:
         threads.append(threading.Thread(target=run_and_collect, args=(waybackurls,)))
+
+    if "waymore" in selected_tools:
+        threads.append(threading.Thread(target=run_and_collect, args=(waymore,)))
+
 
     if "katana" in selected_tools:
         threads.append(threading.Thread(target=run_and_collect, args=(katana,)))
@@ -101,7 +124,8 @@ def run_tools_endpoint(domain, config_path="config.json"):
         t.join()
 
     unique_sorted = sorted(set(results))
-    print(f"[i] Total unique subdomains found: {len(unique_sorted)}")
+    print(f"{Fore.BLUE}[i]{Fore.RESET} Total unique endpoints found: {len(unique_sorted)}")
+
     save_results(domain, unique_sorted, 'urls')
 
     output_dir = os.path.expanduser(f"output/{domain}")
@@ -125,10 +149,6 @@ def run_tools_endpoint(domain, config_path="config.json"):
         t.join()
 
     js_file = sorted(set(js_results))
-    print(f"[i] Total unique js found: {len(js_file)}")
-
-
-        
     
 
     
@@ -137,11 +157,13 @@ def run_tools_endpoint(domain, config_path="config.json"):
 
     merged_urls = set(js_file).union(existing_urls)
 
+    print(f"{Fore.BLUE}[i]{Fore.RESET} Total unique js found: {len(merged_urls)}")
+
     with open(os.path.join(output_dir, f"{domain}_js_urls.txt"), "w") as f:
         for url in sorted(merged_urls):
             f.write(url + "\n")
 
-    alive_endpoints = httpx(domain)
+    alive_endpoints = httpx(domain, custom_header=custom_header)
     save_results(domain, alive_endpoints, 'alive')
 
     return alive_endpoints

@@ -853,34 +853,6 @@ input:checked + .slider:before {
     color: #3b82f6;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Subdomain Detail Modal */
 .subdomain-detail-modal {
             position: fixed;
@@ -1033,6 +1005,53 @@ input:checked + .slider:before {
     }
 
     .modal-content {
+        padding: 1.5rem;
+        width: 95%;
+    }
+}
+
+/* Domain Detail Modal */
+.domain-detail-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.domain-detail-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.domain-detail-modal .modal-content {
+    background-color: #1a1a1a;
+    margin: auto;
+    padding: 2rem;
+    border: 1px solid #333;
+    border-radius: 0.75rem;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.domain-detail-modal.active .modal-content {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .domain-detail-modal .modal-content {
         padding: 1.5rem;
         width: 95%;
     }

@@ -32,5 +32,5 @@ def subfinder(domain):
   
     all_subs = set(subfinder_res)
     all_subs = sorted(all_subs)
-    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Subfinder -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Subfinder -> {len(all_subs)} unique subdomains found")
     return all_subs

@@ -147,7 +147,7 @@ def get_endpoints_details(domain):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('dashboard.html')
 
 
 @app.route('/api/domains')
@@ -227,4 +227,4 @@ def save_config():
 
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1", port=5000, debug=False)
+    app.run(host="127.0.0.1", port=5000, debug=True)

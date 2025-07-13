@@ -36,6 +36,6 @@ def sublist3r(domain):
 
     cleaned = [strip_ansi(line) for line in raw_output]
     subdomains = sorted(set(line for line in cleaned if is_valid_subdomain(line, domain)))
-    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Sublis3r -> {len(subdomains)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Sublis3r -> {len(subdomains)} unique subdomains found")
 
     return subdomains

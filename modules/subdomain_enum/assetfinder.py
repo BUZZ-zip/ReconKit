@@ -33,5 +33,5 @@ def assetfinder(domain):
   
     all_subs = set(assetfinder_res)
     all_subs = sorted(all_subs)
-    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Assetfinder -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Assetfinder -> {len(all_subs)} unique subdomains found")
     return all_subs

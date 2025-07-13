@@ -4,16 +4,16 @@
       "apiKeys": {
         "alienvault": ""
       },
-      "enabled": false
+      "enabled": true
     },
     "assetfinder": {
-      "enabled": false
+      "enabled": true
     },
     "chaos": {
       "apiKeys": {
         "chaos": ""
       },
-      "enabled": false
+      "enabled": true
     },
     "crtsh": {
       "enabled": true
@@ -22,54 +22,54 @@
       "apiKeys": {
         "dnsdumpster": ""
       },
-      "enabled": false
+      "enabled": true
     },
     "findomain": {
-      "enabled": false
+      "enabled": true
     },
     "securitytrails": {
       "apiKeys": {
         "securitytrails": ""
       },
-      "enabled": false
+      "enabled": true
     },
     "subfinder": {
-      "enabled": false
+      "enabled": true
     },
     "sublist3r": {
-      "enabled": false
+      "enabled": true
     },
     "virustotal": {
       "apiKeys": {
         "virustotal": ""
       },
-      "enabled": false
+      "enabled": true
     }
   },
   "endpoint": {
     "gau": {
-      "enabled": false
+      "enabled": true
     },
     "getJS": {
-      "enabled": false
+      "enabled": true
     },
     "gospider": {
-      "enabled": false
+      "enabled": true
     },
     "hakrawler": {
-      "enabled": false
+      "enabled": true
     },
     "katana": {
-      "enabled": false
+      "enabled": true
     },
     "subjs": {
-      "enabled": false
+      "enabled": true
     },
     "waybackurls": {
-      "enabled": false
+      "enabled": true
     },
     "waymore": {
-      "enabled": false
+      "enabled": true
     }
   },
   "screenshot": {

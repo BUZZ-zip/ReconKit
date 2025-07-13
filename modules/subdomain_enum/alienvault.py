@@ -19,19 +19,20 @@ def alienvault(domain):
     output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
 
-    config_path = "config.json"
+    config_path = "page/static/config.json"
     with open(config_path, "r") as f:
         old_config = json.load(f)
-        api_keys = old_config.get("api_keys", {})
-        alienvault_key = api_keys.get("alienvault", None)
+
+        alienvault_key = (
+        old_config.get("subdomain", {})
+        .get("alienvault", {})
+        .get("apiKeys", {})
+        .get("alienvault", None)
+    )
 
     if not alienvault_key:
         print(f"{Fore.RED}[!]{Style.RESET_ALL} Clé API AlienVault non trouvée dans config.json.")
         return []
-
-    # AlienVault OTX API endpoint pour les sous-domaines
-    # Doc : https://otx.alienvault.com/api/
-    # Exemple : https://otx.alienvault.com/api/v1/indicators/domain/{domain}/passive_dns
 
     alienvault_cmd = (
         f'curl -s -H "X-OTX-API-KEY: {alienvault_key}" '
@@ -43,5 +44,5 @@ def alienvault(domain):
     run_command(alienvault_cmd, alienvault_res)
 
     all_subs = sorted(set(alienvault_res))
-    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running AlienVault -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running AlienVault -> {len(all_subs)} unique subdomains found")
     return all_subs

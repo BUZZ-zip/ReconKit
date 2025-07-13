@@ -20,11 +20,16 @@ def virustotal(domain):
     output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
 
-    config_path = "config.json"
+    config_path = "page/static/config.json"
     with open(config_path, "r") as f:
         old_config = json.load(f)
-        api_keys = old_config.get("api_keys", {})
-        virustotal_key = api_keys.get("virustotal", None)
+
+        virustotal_key = (
+        old_config.get("subdomain", {})
+        .get("virustotal", {})
+        .get("apiKeys", {})
+        .get("virustotal", None)
+    )
 
     if not virustotal_key:
         print(f"{Fore.RED}[!]{Style.RESET_ALL} Clé API VirusTotal non trouvée dans config.json.")
@@ -41,5 +46,5 @@ def virustotal(domain):
     run_command(virustotal_cmd, virustotal_res)
 
     all_subs = sorted(set(virustotal_res))
-    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running VirusTotal -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running VirusTotal -> {len(all_subs)} unique subdomains found")
     return all_subs

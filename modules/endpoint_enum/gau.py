@@ -1,6 +1,8 @@
 import subprocess
 import os
 
+from colorama import Fore,Style
+
 
 def run_command_input(cmd, input_path, output_list):
     """Exécute une commande shell avec un fichier en entrée, envoie le contenu sur stdin."""
@@ -17,7 +19,7 @@ def run_command_input(cmd, input_path, output_list):
 
 
 
-def gau(domain):
+def gau(domain,custom_header):
     """Enumère les sous-domaines d'un domaine à l'aide de plusieurs outils."""
     output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
@@ -31,10 +33,8 @@ def gau(domain):
 
     run_command_input(gau_cmd,input_file,gau_res)
 
-    print("[+] Running Gau")
-
-  
+     
     all_subs = set(gau_res)
     all_subs = sorted(all_subs)
-    print(f"  -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Gau -> {len(all_subs)} unique endpoints found")
     return all_subs

@@ -30,5 +30,5 @@ def findomain(domain):
   
     all_subs = set(findomain_res)
     all_subs = sorted(all_subs)
-    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Chaos -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running Chaos -> {len(all_subs)} unique subdomains found")
     return all_subs

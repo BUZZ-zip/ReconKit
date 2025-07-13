@@ -1,5 +1,6 @@
 import subprocess
 import os
+from colorama import Fore,Style
 
 
 def run_command(cmd, output_list):
@@ -14,23 +15,25 @@ def run_command(cmd, output_list):
 
 
 
-def subjs(domain):
-    """Enumère les sous-domaines d'un domaine à l'aide de plusieurs outils."""
+def subjs(domain, custom_header=None):
+    """Enumère les sous-domaines d'un domaine à l'aide de plusieurs outils.
+    Note: subjs supporte l'ajout de headers via l'option -H."""
+
+
     output_dir = os.path.expanduser(f"output/{domain}")
     os.makedirs(output_dir, exist_ok=True)
     input_file = f"{output_dir}/{domain}_endpoints.txt"
-    subjs_cmd = f"subjs -i {input_file} -c 100"
+    header_part = f'-ua "{custom_header}" ' if custom_header else ""
+    subjs_cmd = f"subjs -i {input_file} {header_part} -c 100"
 
-    subjs_res=[]
+    subjs_res = []
+    run_command(subjs_cmd, subjs_res)
 
-   
 
-    run_command(subjs_cmd,subjs_res)
-
-    print("[+] Running subJS")
 
     filtered = {url for url in subjs_res if domain in url}
     all_subs = set(filtered)
     all_subs = sorted(all_subs)
-    print(f"  -> {len(all_subs)} unique subdomains found.")
+    print(f"{Fore.GREEN}[+]{Style.RESET_ALL} Running SubJS -> {len(all_subs)} unique Js files found")
+    return all_subs
     return all_subs

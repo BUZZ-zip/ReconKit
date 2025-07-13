@@ -123,11 +123,13 @@ def main(a):
     parser.add_argument("-open", "--open_page", action="store_true", help="Ouvre une page web avec les résultats")
     parser.add_argument("-c","--config", action="store_true", help="Ouvre un menu pour sélectionner les outils")
     parser.add_argument("-m","--module", choices=["subdomain", "endpoint","paramfinder"], help="Choix du module à exécuter")
+    parser.add_argument("-H","--header", help="Choix du header à utiliser")
     args = parser.parse_args()
 
     domain = args.domain
     open_result = args.open_page
     config_menu=args.config
+    custom_header = args.header
     output_dir = os.path.expanduser(f"output/{domain}")
     print_banner(domain, output_dir)
 
@@ -142,15 +144,15 @@ def main(a):
         endpoints = None
 
         if args.module == "subdomain":
-            subdomains=run_tools_subdomain(domain)
+            subdomains = run_tools_subdomain(domain, custom_header=custom_header)
         elif args.module == "endpoint":
-            endpoints=run_tools_endpoint(domain)
+            endpoints = run_tools_endpoint(domain, custom_header=custom_header)
         elif args.module == "paramfinder":
-            run_tools_paramfinder(domain)
+            run_tools_paramfinder(domain, custom_header=custom_header)
         else:
-                subdomains=run_tools_subdomain(domain)
-                endpoints=run_tools_endpoint(domain)
-                run_tools_paramfinder(domain)
+                subdomains = run_tools_subdomain(domain, custom_header=custom_header)
+                endpoints = run_tools_endpoint(domain, custom_header=custom_header)
+                
         
         save_domain_result(domain,subdomains,endpoints)
     
